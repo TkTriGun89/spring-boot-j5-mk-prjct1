@@ -1,10 +1,10 @@
-package com.bezkoder.spring.test.repository;
+package com.santk.spring.test.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.bezkoder.spring.test.model.Tutorial;
+import com.santk.spring.test.model.Tutorial;
 
 public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
   List<Tutorial> findByPublished(boolean published);

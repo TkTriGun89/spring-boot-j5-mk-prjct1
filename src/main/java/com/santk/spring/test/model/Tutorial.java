@@ -1,4 +1,4 @@
-package com.bezkoder.spring.test.model;
+package com.santk.spring.test.model;
 
 import javax.persistence.*;
 

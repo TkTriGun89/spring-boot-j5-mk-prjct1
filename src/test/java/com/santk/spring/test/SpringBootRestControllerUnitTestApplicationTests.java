@@ -1,4 +1,4 @@
-package com.bezkoder.spring.test;
+package com.santk.spring.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

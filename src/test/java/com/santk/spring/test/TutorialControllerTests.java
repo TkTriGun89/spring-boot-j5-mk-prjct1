@@ -1,4 +1,4 @@
-package com.bezkoder.spring.test;
+package com.santk.spring.test;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -22,9 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.bezkoder.spring.test.controller.TutorialController;
-import com.bezkoder.spring.test.model.Tutorial;
-import com.bezkoder.spring.test.repository.TutorialRepository;
+import com.santk.spring.test.controller.TutorialController;
+import com.santk.spring.test.model.Tutorial;
+import com.santk.spring.test.repository.TutorialRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(TutorialController.class)
