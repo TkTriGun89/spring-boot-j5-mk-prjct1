@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tutorials")
-public class Tutorial {
+public class SbtEntityH2 {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,17 +19,17 @@ public class Tutorial {
   @Column(name = "published")
   private boolean published;
 
-  public Tutorial() {
+  public SbtEntityH2() {
 
   }
 
-  public Tutorial(String title, String description, boolean published) {
+  public SbtEntityH2(String title, String description, boolean published) {
     this.title = title;
     this.description = description;
     this.published = published;
   }
   
-  public Tutorial(long id, String title, String description, boolean published) {
+  public SbtEntityH2(long id, String title, String description, boolean published) {
     this.id = id;
     this.title = title;
     this.description = description;

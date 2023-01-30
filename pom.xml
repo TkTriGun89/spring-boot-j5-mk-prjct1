@@ -8,7 +8,7 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bezkoder</groupId>
+	<groupId>com.santk</groupId>
 	<artifactId>spring-boot-rest-controller-unit-test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-rest-controller-unit-test</name>

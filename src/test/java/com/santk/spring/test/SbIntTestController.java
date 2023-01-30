@@ -22,15 +22,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.santk.spring.test.controller.TutorialController;
-import com.santk.spring.test.model.Tutorial;
-import com.santk.spring.test.repository.TutorialRepository;
+import com.santk.spring.test.controller.SbtController;
+import com.santk.spring.test.model.SbtEntityH2;
+import com.santk.spring.test.repository.SbtRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(TutorialController.class)
-public class TutorialControllerTests {
+@WebMvcTest(SbtController.class)
+public class SbIntTestController {
   @MockBean
-  private TutorialRepository tutorialRepository;
+  private SbtRepository tutorialRepository;
 
   @Autowired
   private MockMvc mockMvc;
@@ -40,7 +40,7 @@ public class TutorialControllerTests {
 
   @Test
   void shouldCreateTutorial() throws Exception {
-    Tutorial tutorial = new Tutorial(1, "Spring Boot @WebMvcTest", "Description", true);
+    SbtEntityH2 tutorial = new SbtEntityH2(1, "Spring Boot @WebMvcTest", "Description", true);
 
     mockMvc.perform(post("/api/tutorials").contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(tutorial)))
@@ -51,7 +51,7 @@ public class TutorialControllerTests {
   @Test
   void shouldReturnTutorial() throws Exception {
     long id = 1L;
-    Tutorial tutorial = new Tutorial(id, "Spring Boot @WebMvcTest", "Description", true);
+    SbtEntityH2 tutorial = new SbtEntityH2(id, "Spring Boot @WebMvcTest", "Description", true);
 
     when(tutorialRepository.findById(id)).thenReturn(Optional.of(tutorial));
     mockMvc.perform(get("/api/tutorials/{id}", id)).andExpect(status().isOk())
@@ -74,10 +74,10 @@ public class TutorialControllerTests {
 
   @Test
   void shouldReturnListOfTutorials() throws Exception {
-    List<Tutorial> tutorials = new ArrayList<>(
-        Arrays.asList(new Tutorial(1, "Spring Boot @WebMvcTest 1", "Description 1", true),
-            new Tutorial(2, "Spring Boot @WebMvcTest 2", "Description 2", true),
-            new Tutorial(3, "Spring Boot @WebMvcTest 3", "Description 3", true)));
+    List<SbtEntityH2> tutorials = new ArrayList<>(
+        Arrays.asList(new SbtEntityH2(1, "Spring Boot @WebMvcTest 1", "Description 1", true),
+            new SbtEntityH2(2, "Spring Boot @WebMvcTest 2", "Description 2", true),
+            new SbtEntityH2(3, "Spring Boot @WebMvcTest 3", "Description 3", true)));
 
     when(tutorialRepository.findAll()).thenReturn(tutorials);
     mockMvc.perform(get("/api/tutorials"))
@@ -88,9 +88,9 @@ public class TutorialControllerTests {
 
   @Test
   void shouldReturnListOfTutorialsWithFilter() throws Exception {
-    List<Tutorial> tutorials = new ArrayList<>(
-        Arrays.asList(new Tutorial(1, "Spring Boot @WebMvcTest", "Description 1", true),
-            new Tutorial(3, "Spring Boot Web MVC", "Description 3", true)));
+    List<SbtEntityH2> tutorials = new ArrayList<>(
+        Arrays.asList(new SbtEntityH2(1, "Spring Boot @WebMvcTest", "Description 1", true),
+            new SbtEntityH2(3, "Spring Boot Web MVC", "Description 3", true)));
 
     String title = "Boot";
     MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
@@ -105,11 +105,11 @@ public class TutorialControllerTests {
   
   @Test
   void shouldReturnNoContentWhenFilter() throws Exception {
-    String title = "BezKoder";
+    String title = "SanTek";
     MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
     paramsMap.add("title", title);
     
-    List<Tutorial> tutorials = Collections.emptyList();
+    List<SbtEntityH2> tutorials = Collections.emptyList();
 
     when(tutorialRepository.findByTitleContaining(title)).thenReturn(tutorials);
     mockMvc.perform(get("/api/tutorials").params(paramsMap))
@@ -121,11 +121,11 @@ public class TutorialControllerTests {
   void shouldUpdateTutorial() throws Exception {
     long id = 1L;
 
-    Tutorial tutorial = new Tutorial(id, "Spring Boot @WebMvcTest", "Description", false);
-    Tutorial updatedtutorial = new Tutorial(id, "Updated", "Updated", true);
+    SbtEntityH2 tutorial = new SbtEntityH2(id, "Spring Boot @WebMvcTest", "Description", false);
+    SbtEntityH2 updatedtutorial = new SbtEntityH2(id, "Updated", "Updated", true);
 
     when(tutorialRepository.findById(id)).thenReturn(Optional.of(tutorial));
-    when(tutorialRepository.save(any(Tutorial.class))).thenReturn(updatedtutorial);
+    when(tutorialRepository.save(any(SbtEntityH2.class))).thenReturn(updatedtutorial);
 
     mockMvc.perform(put("/api/tutorials/{id}", id).contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(updatedtutorial)))
@@ -140,10 +140,10 @@ public class TutorialControllerTests {
   void shouldReturnNotFoundUpdateTutorial() throws Exception {
     long id = 1L;
 
-    Tutorial updatedtutorial = new Tutorial(id, "Updated", "Updated", true);
+    SbtEntityH2 updatedtutorial = new SbtEntityH2(id, "Updated", "Updated", true);
 
     when(tutorialRepository.findById(id)).thenReturn(Optional.empty());
-    when(tutorialRepository.save(any(Tutorial.class))).thenReturn(updatedtutorial);
+    when(tutorialRepository.save(any(SbtEntityH2.class))).thenReturn(updatedtutorial);
 
     mockMvc.perform(put("/api/tutorials/{id}", id).contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(updatedtutorial)))

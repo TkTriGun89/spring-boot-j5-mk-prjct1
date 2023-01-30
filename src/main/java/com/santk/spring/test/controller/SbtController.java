@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.santk.spring.test.repository.TutorialRepository;
+import com.santk.spring.test.repository.SbtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +19,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.santk.spring.test.model.Tutorial;
+import com.santk.spring.test.model.SbtEntityH2;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class TutorialController {
+public class SbtController {
 
   @Autowired
-  TutorialRepository tutorialRepository;
+  SbtRepository tutorialRepository;
 
   @GetMapping("/tutorials")
-  public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
+  public ResponseEntity<List<SbtEntityH2>> getAllTutorials(@RequestParam(required = false) String title) {
     try {
-      List<Tutorial> tutorials = new ArrayList<Tutorial>();
+      List<SbtEntityH2> tutorials = new ArrayList<SbtEntityH2>();
 
       if (title == null)
         tutorialRepository.findAll().forEach(tutorials::add);
@@ -50,8 +50,8 @@ public class TutorialController {
   }
 
   @GetMapping("/tutorials/{id}")
-  public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
-    Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
+  public ResponseEntity<SbtEntityH2> getTutorialById(@PathVariable("id") long id) {
+    Optional<SbtEntityH2> tutorialData = tutorialRepository.findById(id);
 
     if (tutorialData.isPresent()) {
       return new ResponseEntity<>(tutorialData.get(), HttpStatus.OK);
@@ -61,9 +61,9 @@ public class TutorialController {
   }
 
   @PostMapping("/tutorials")
-  public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
+  public ResponseEntity<SbtEntityH2> createTutorial(@RequestBody SbtEntityH2 tutorial) {
     try {
-      Tutorial _tutorial = tutorialRepository.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+      SbtEntityH2 _tutorial = tutorialRepository.save(new SbtEntityH2(tutorial.getTitle(), tutorial.getDescription(), false));
       return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,11 +71,11 @@ public class TutorialController {
   }
 
   @PutMapping("/tutorials/{id}")
-  public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
-    Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
+  public ResponseEntity<SbtEntityH2> updateTutorial(@PathVariable("id") long id, @RequestBody SbtEntityH2 tutorial) {
+    Optional<SbtEntityH2> tutorialData = tutorialRepository.findById(id);
 
     if (tutorialData.isPresent()) {
-      Tutorial _tutorial = tutorialData.get();
+      SbtEntityH2 _tutorial = tutorialData.get();
       _tutorial.setTitle(tutorial.getTitle());
       _tutorial.setDescription(tutorial.getDescription());
       _tutorial.setPublished(tutorial.isPublished());
@@ -107,9 +107,9 @@ public class TutorialController {
   }
 
   @GetMapping("/tutorials/published")
-  public ResponseEntity<List<Tutorial>> findByPublished() {
+  public ResponseEntity<List<SbtEntityH2>> findByPublished() {
     try {
-      List<Tutorial> tutorials = tutorialRepository.findByPublished(true);
+      List<SbtEntityH2> tutorials = tutorialRepository.findByPublished(true);
 
       if (tutorials.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
