@@ -1,4 +1,4 @@
-package com.santk.spring.test;
+package com.santk.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

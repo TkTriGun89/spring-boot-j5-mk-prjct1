@@ -1,10 +1,10 @@
-package com.santk.spring.test.model;
+package com.santk.springboot.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tutorials")
-public class SbtEntityH2 {
+@Table(name = "orders")
+public class OrderEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,17 +19,17 @@ public class SbtEntityH2 {
   @Column(name = "published")
   private boolean published;
 
-  public SbtEntityH2() {
+  public OrderEntity() {
 
   }
 
-  public SbtEntityH2(String title, String description, boolean published) {
+  public OrderEntity(String title, String description, boolean published) {
     this.title = title;
     this.description = description;
     this.published = published;
   }
   
-  public SbtEntityH2(long id, String title, String description, boolean published) {
+  public OrderEntity(long id, String title, String description, boolean published) {
     this.id = id;
     this.title = title;
     this.description = description;
