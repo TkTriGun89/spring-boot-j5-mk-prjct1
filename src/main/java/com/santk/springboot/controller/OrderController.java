@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.santk.springboot.model.OrderEntity;
 
-@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
 public class OrderController {
-    @Autowired
-    private OrderService orderservice;
 
     private static final Logger LOGGER = LogManager.getLogger(OrderController.class);
+
+    @Autowired
+    private OrderService orderservice;
 
     /**
      * Create New Orders
@@ -53,7 +52,7 @@ public class OrderController {
      * @param title get orders for the particular title
      * @return
      */
-    @GetMapping("/orders")
+    @GetMapping("/getorders")
     public ResponseEntity<List<OrderEntity>> getAllOrders(@RequestParam(required = false) String title) {
         try {
             LOGGER.info("getAllOrders controller");
@@ -75,7 +74,7 @@ public class OrderController {
      * @param id - order number
      * @return
      */
-    @GetMapping("/order/{id}")
+    @GetMapping("/orders/{id}")
     public ResponseEntity<OrderEntity> getOrderById(@PathVariable("id") long id) {
         try {
             LOGGER.info("getOrderById controller");
@@ -97,7 +96,7 @@ public class OrderController {
      *
      * @return
      */
-    @GetMapping("/order/published")
+    @GetMapping("/orders/published")
     public ResponseEntity<List<OrderEntity>> findOrderByPublished() {
         boolean isPublished = true;
         try {
@@ -120,7 +119,7 @@ public class OrderController {
      * @param order
      * @return
      */
-    @PutMapping("/order/{id}")
+    @PutMapping("/orders/{id}")
     public ResponseEntity<OrderEntity> updateOrder(@PathVariable("id") long id,
                                                    @RequestBody OrderEntity order) {
         try {

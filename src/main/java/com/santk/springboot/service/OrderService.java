@@ -1,6 +1,10 @@
 package com.santk.springboot.service;
 
 import com.santk.springboot.model.OrderEntity;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 

@@ -7,13 +7,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class OrderServiceImpl implements OrderService {
     public OrderServiceImpl() {
     }
     @Autowired
-    OrderRepository ordersRepo;
+    private OrderRepository ordersRepo;
 
     @Override
     public OrderEntity createOrder(OrderEntity orderEnt) {

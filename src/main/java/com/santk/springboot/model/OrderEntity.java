@@ -3,7 +3,7 @@ package com.santk.springboot.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "OrderEntity")
 public class OrderEntity {
 
   @Id
@@ -66,7 +66,7 @@ public class OrderEntity {
 
   @Override
   public String toString() {
-    return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+    return "Order [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
   }
 
 }
